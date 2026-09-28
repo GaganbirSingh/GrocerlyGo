@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const SellerLogin = () => {
     const {isSeller, setIsSeller, navigate, axios} = useAppContext()
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState("admin@example.com");
     const [password, setPassword] = useState("");
 
     const onSubmitHandler = async (event)=>{
@@ -37,14 +37,12 @@ const SellerLogin = () => {
             <div className="w-full ">
                 <p>Email</p>
                 <input onChange={(e)=>setEmail(e.target.value)} value={email}
-                 type="email" placeholder="enter you email" 
-                className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" required/>
+                 name="email" type="email" autoComplete="username" className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" required/>
             </div>
             <div className="w-full ">
                 <p>Password</p>
                 <input onChange={(e)=>setPassword(e.target.value)} value={password}
-                 type="password" placeholder="enter your password"
-                className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" required/>
+                 name="password" type="password" autoComplete="current-password" className="border border-gray-200 rounded w-full p-2 mt-1 outline-primary" required/>
             </div>
             <button className="bg-primary text-white w-full py-2 rounded-md cursor-pointer">Login</button>
         </div>

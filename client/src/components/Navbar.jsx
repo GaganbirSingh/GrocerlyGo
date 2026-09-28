@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 
 const Navbar = () => {
     const [open, setOpen] = React.useState(false)
-    const {user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery, getCartCount, axios} = useAppContext();
+    const {user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery, getCartCount, axios, setIsSeller} = useAppContext();
 
     const logout = async ()=>{
       try {
@@ -22,6 +22,17 @@ const Navbar = () => {
         toast.error(error.message)
       }
         
+    }
+
+    const openSellerLogin = async () => {
+      try {
+        await axios.get('/api/seller/logout');
+        setIsSeller(false);
+      navigate('/seller');
+      }catch (error) {
+        setIsSeller(false);
+        navigate('/seller');
+      }
     }
 
     useEffect(()=>{
@@ -41,6 +52,12 @@ const Navbar = () => {
         <NavLink to='/'>Home</NavLink>
         <NavLink to='/products'>All Product</NavLink>
         <NavLink to='/'>Contact</NavLink>
+        <button
+          onClick={openSellerLogin}
+          className="cursor-pointer"
+        >
+          Seller Dashboard
+        </button>
         <NavLink to='/seller'>Seller Dashboard</NavLink>
 
         <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
